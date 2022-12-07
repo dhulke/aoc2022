@@ -1,0 +1,15 @@
+$ cd /
+$ ls
+123 a
+7 b
+dir c
+dir d
+$ cd c
+$ ls
+30 a
+30 b
+$ cd ..
+$ cd d
+$ ls
+5 a
+5 b
