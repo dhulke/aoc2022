@@ -99,15 +99,15 @@ $ ls
 
     def test_counter_size_100(self):
         directory = Parser.parse_input_file("test/day7/small_input.txt")
-        self.assertEqual(Counter.sum_directory_sizes_below(directory, 100), 70);
+        self.assertEqual(Counter.sum_directory_sizes_below(directory, 100), 70)
 
     def test_counter_size_123(self):
         directory = Parser.parse_input_file("test/day7/small_input.txt")
-        self.assertEqual(Counter.sum_directory_sizes_below(directory, 270), 270);
+        self.assertEqual(Counter.sum_directory_sizes_below(directory, 270), 270)
 
     def test_counter_size_10(self):
         directory = Parser.parse_input_file("test/day7/small_input.txt")
-        self.assertEqual(Counter.sum_directory_sizes_below(directory, 15), 10);
+        self.assertEqual(Counter.sum_directory_sizes_below(directory, 15), 10)
 
     def test_least_directory_size_for_total_200_available_10(self):
         directory = Parser.parse_input_file("test/day7/small_input.txt")
