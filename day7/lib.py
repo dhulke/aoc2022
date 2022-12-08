@@ -93,19 +93,19 @@ class Parser:
 class Counter:
     @classmethod
     def sum_directory_sizes_below(cls, directory: Directory, size: int) -> int:
-        count = cls.__recursive_count(directory, size)
+        count = cls.__recursive_sum_directory_sizes_below(directory, size)
         directory_size = directory.size()
         if directory_size <= size:
             count += directory_size
         return count
 
     @classmethod
-    def __recursive_count(cls, directory: Directory, size: int) -> int:
+    def __recursive_sum_directory_sizes_below(cls, directory: Directory, size: int) -> int:
         directories = directory.get_directories()
         count = reduce(lambda acc, c: acc + (c if c <= size else 0),
                        map(lambda d: d.size(), directories), 0)
         for directory in directories:
-            count += cls.__recursive_count(directory, size)
+            count += cls.__recursive_sum_directory_sizes_below(directory, size)
         return count
 
     @classmethod
@@ -116,16 +116,16 @@ class Counter:
         used_space = directory.size()
         available_space = total_space - used_space
         needed_space = expected_available_space - available_space
-        sizes = cls.__directory_sizes(directory)
+        sizes = cls.__recursive_directory_sizes(directory)
         sizes.append(directory.size())
         for size in sorted(sizes):
             if size >= needed_space:
                 return size
 
     @classmethod
-    def __directory_sizes(cls, directory: Directory) -> List[int]:
+    def __recursive_directory_sizes(cls, directory: Directory) -> List[int]:
         sizes = []
         for directory in directory.get_directories():
             sizes.append(directory.size())
-            sizes.extend(cls.__directory_sizes(directory))
+            sizes.extend(cls.__recursive_directory_sizes(directory))
         return sizes
